@@ -1,24 +1,47 @@
 pipeline {
   agent any
   stages {
-    stage('one') {
+    stage('Build') {
       steps {
         echo 'Building'
         sh 'mvn compile'
       }
     }
 
-    stage('two') {
-      steps {
-        echo 'test'
-        sh 'mvn clean test'
+    stage('Test') {
+      parallel {
+        stage('Test') {
+          steps {
+            echo 'test'
+            sh 'mvn clean test'
+          }
+        }
+
+        stage('unit') {
+          steps {
+            sleep 2
+          }
+        }
+
+        stage('UI') {
+          steps {
+            sleep 5
+          }
+        }
+
       }
     }
 
-    stage('three') {
+    stage('Package') {
       steps {
-        echo 'step 3'
-        sleep 5
+        echo 'package artifact'
+        sh 'nvm package -DskipTests'
+      }
+    }
+
+    stage('archive') {
+      steps {
+        archiveArtifacts '**/target/*.jar'
       }
     }
 
