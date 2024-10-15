@@ -1,32 +1,35 @@
 pipeline {
   agent any
-  tools{
-    maven "Maven 3.6.3"
-  }
-  stages{
-      stage("one"){
-          steps{
-              echo 'step 1'
-              sleep 3
-          }
+  stages {
+    stage('one') {
+      steps {
+        echo 'Building'
+        sh 'mvn compile'
       }
-      stage("two"){
-          steps{
-              echo 'step 2'
-              sleep 9
-          }
-      }
-      stage("three"){
-          steps{
-              echo 'step 3'
-              sleep 5
-          }
-      }
-  }
-
-  post{
-    always{
-        echo 'This pipeline is completed..'
     }
+
+    stage('two') {
+      steps {
+        echo 'test'
+        sh 'mvn clean test'
+      }
+    }
+
+    stage('three') {
+      steps {
+        echo 'step 3'
+        sleep 5
+      }
+    }
+
+  }
+  tools {
+    maven 'Maven 3.6.3'
+  }
+  post {
+    always {
+      echo 'This pipeline is completed..'
+    }
+
   }
 }
