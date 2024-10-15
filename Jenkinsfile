@@ -35,7 +35,7 @@ pipeline {
     stage('Package') {
       steps {
         echo 'package artifact'
-        sh 'nvm package -DskipTests'
+        sh 'mvn package -DskipTests'
       }
     }
 
