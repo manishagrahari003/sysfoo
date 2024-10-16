@@ -46,7 +46,6 @@ pipeline {
       }
     }
 
-    if (env.BRANCH_NAME == 'main') {
 
       stage('Package') {
         parallel {
@@ -81,7 +80,6 @@ pipeline {
 
         }
       }
-    }
 
   }
   tools {
