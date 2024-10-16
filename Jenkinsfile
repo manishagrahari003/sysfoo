@@ -1,7 +1,18 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'maven:3.9.6-eclipse-temurin-17'
+    }
+
+  }
   stages {
     stage('Build') {
+      agent {
+        docker {
+          image 'maven:3.9.6-eclipse-temurin-17'
+        }
+
+      }
       steps {
         echo 'Building'
         sh 'mvn compile'
@@ -11,6 +22,12 @@ pipeline {
     stage('Test') {
       parallel {
         stage('Test') {
+          agent {
+            docker {
+              image 'maven:3.9.6-eclipse-temurin-17'
+            }
+
+          }
           steps {
             echo 'test'
             sh 'mvn clean test'
@@ -18,6 +35,7 @@ pipeline {
         }
 
         stage('unit') {
+          agent any
           steps {
             sleep 2
           }
@@ -33,6 +51,12 @@ pipeline {
     }
 
     stage('Package') {
+      agent {
+        docker {
+          image 'maven:3.9.6-eclipse-temurin-17'
+        }
+
+      }
       steps {
         echo 'package artifact'
         sh 'mvn package -DskipTests'
@@ -40,6 +64,12 @@ pipeline {
     }
 
     stage('archive') {
+      agent {
+        docker {
+          image 'maven:3.9.6-eclipse-temurin-17'
+        }
+
+      }
       steps {
         archiveArtifacts '**/target/*.jar'
       }
