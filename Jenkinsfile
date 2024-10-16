@@ -28,6 +28,9 @@ pipeline {
             sh 'mvn clean test'
           }
         }
+        if (env.BRANCH_NAME !== 'main') {
+          return
+        }
 
         stage('unit') {
           agent any
