@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+  sysfoo:
+    image: manish7863/sysfoo:latest
+    ports:
+      - 8888:8080
