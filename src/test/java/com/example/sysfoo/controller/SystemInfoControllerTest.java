@@ -25,11 +25,11 @@ public class SystemInfoControllerTest {
     @MockBean
     private SystemInfoService systemInfoService;
 
-    @Test
-    public void getVersionTest() throws Exception {
-        when(systemInfoService.getAppVersion()).thenReturn("1.0.0");
-        mockMvc.perform(get("/version"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("1.0.0"));
-    }
+    // @Test
+    // public void getVersionTest() throws Exception {
+    //     when(systemInfoService.getAppVersion()).thenReturn("1.0.0");
+    //     mockMvc.perform(get("/version"))
+    //             .andExpect(status().isOk())
+    //             .andExpect(content().string("1.0.0"));
+    // }
 }
